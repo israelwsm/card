@@ -1,10 +1,10 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const hubspotApiUrl = 'https://api.hubapi.com/crm/v3/objects/contacts';
-const accessToken = 'pat-na1-f441ed05-56e8-4200-bb2e-30208efaae68';
+const accessToken = process.env.pat-na1-f441ed05-56e8-4200-bb2e-30208efaae68;
 
 // Middleware para parsear JSON
 app.use(express.json());
