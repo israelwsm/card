@@ -18,6 +18,7 @@
   </style>
 </head>
 <body>
+  <a href="/auth">Autenticarse con HubSpot</a>
   <div id="cards"></div>
 
   <script>
@@ -25,19 +26,19 @@
       .then(response => response.json())
       .then(data => {
         const cardsContainer = document.getElementById('cards');
-        data.forEach(contact => {
+        data.results.forEach(contact => {
           const card = document.createElement('div');
           card.className = 'card';
           card.innerHTML = `
             <div class="container">
-              <h4><b>${contact.time}</b></h4>
-              <p>${contact.name}</p>
-              <p>${contact.email}</p>
+              <h4><b>${contact.title}</b></h4>
+              <p>${contact.link.label}</p>
             </div>
           `;
           cardsContainer.appendChild(card);
         });
-      });
+      })
+      .catch(error => console.error('Error fetching data:', error));
   </script>
 </body>
 </html>
