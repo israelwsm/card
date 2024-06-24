@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Card</title>
+  <style>
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      width: 300px;
+      padding: 16px;
+      margin: 16px;
+    }
+    .container {
+      padding: 2px 16px;
+    }
+  </style>
+</head>
+<body>
+  <div id="cards"></div>
+
+  <script>
+    fetch('/api/hubspot-data')
+      .then(response => response.json())
+      .then(data => {
+        const cardsContainer = document.getElementById('cards');
+        data.forEach(contact => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <div class="container">
+              <h4><b>${contact.time}</b></h4>
+              <p>${contact.name}</p>
+              <p>${contact.email}</p>
+            </div>
+          `;
+          cardsContainer.appendChild(card);
+        });
+      });
+  </script>
+</body>
+</html>
